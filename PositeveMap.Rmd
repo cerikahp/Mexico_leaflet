@@ -1,7 +1,9 @@
 ---
 title: "Mexico's Positve Active Cases"
 date: "`r Sys.Date()`"
-output: html_document
+output: 
+  html_document:
+    keep_md: true
 ---
 
 ```{r setup, include=FALSE}
@@ -12,8 +14,10 @@ library(leaflet)
 library(stringr)
 library(scales)
 library(sf)
+library(rmapshaper)
 mexico <- read_sf("geo_data/00mun.shp") %>%
-  st_transform(crs = 4326)
+  st_transform(crs = 4326) %>% 
+  st_simplify()
 pal <- colorNumeric("RdYlBu", NULL)
 
 states <- read_sf("geo_data/00ent.shp") %>%
@@ -44,7 +48,7 @@ mun_pop <- paste0("<strong>Municipio: </strong>",
 covid_mex_group %>% 
   leaflet() %>%
   addProviderTiles("CartoDB.Positron") %>%
-  addPolylines(data = states, color = "black", opacity = 1, weight = 1) %>% 
+ # addPolylines(data = states, color = "black", opacity = 1, weight = 1) %>% 
   addLegend("bottomright", pal = pal, values = ~log10(N),
             title = "Number of positive cases (log10)"
             )   %>% 
