@@ -2,3 +2,4 @@ doc/PositeveMap.md filter=lfs diff=lfs merge=lfs -text
 doc/index.md filter=lfs diff=lfs merge=lfs -text
 docs/PositeveMap.md filter=lfs diff=lfs merge=lfs -text
 docs/index.md filter=lfs diff=lfs merge=lfs -text
+docs/index.html filter=lfs diff=lfs merge=lfs -text
